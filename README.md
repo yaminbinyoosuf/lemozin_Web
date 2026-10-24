@@ -24,6 +24,43 @@ npm run preview
 
 The static output is written to `dist/`.
 
+## Deploying to Cloudflare
+
+### Option A — Cloudflare Pages with Git (recommended)
+
+In the Cloudflare dashboard:
+
+1. **Workers & Pages → Create → Pages → Connect to Git**
+2. Authorise the **Cloudflare Pages** GitHub App and grant it access to
+   `yaminbinyoosuf/lemozin_Web`.
+3. Use **Build command** `npm run build` and **Build output directory** `dist`.
+
+If the dashboard shows **“Missing git connection”**, the GitHub App has not
+been installed on the account that owns the repository, or it was installed
+without access to this repo. Open GitHub → **Settings → Applications →
+Installed GitHub Apps**, configure the Cloudflare app, and add
+`lemozin_Web`. A Cloudflare Pages project using Git must have this app
+connection; selecting the repo in the dropdown alone is not enough.
+
+### Option B — Deploy from the command line
+
+This bypasses the GitHub App connection entirely:
+
+```bash
+npx wrangler login          # choose the Cloudflare account that should own the site
+npm run deploy:pages        # Cloudflare Pages
+# or
+npm run deploy              # Cloudflare Workers static assets
+```
+
+`wrangler.jsonc` configures the Workers option to serve `dist/` as static
+assets. `public/_headers` adds security and cache headers for both options.
+
+### Option C — Pages direct upload
+
+In the dashboard, create a Pages project with **Direct Upload** and drag the
+generated `dist/` folder into it. No Git connection is required.
+
 ## Project structure
 
 ```
@@ -36,6 +73,7 @@ src/
 public/
   brand/          Official logo artwork (see brand/README.md)
   images/         Optimised WebP photography
+  _headers        Cloudflare security and cache headers
   og-image.png    1200 × 630 social sharing artwork
   favicon*.png    Official monogram app icons
 ```

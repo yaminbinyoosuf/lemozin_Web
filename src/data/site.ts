@@ -15,8 +15,8 @@ export const site = {
 } as const
 
 export const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Lessons', href: '#lessons' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', section: 'home' },
+  { label: 'Lessons', section: 'lessons' },
+  { label: 'About', section: 'about' },
+  { label: 'Book a Lesson', href: '/book' },
 ] as const

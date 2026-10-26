@@ -1,45 +1,43 @@
-import { getWhatsAppUrl, whatsappMessages, type LessonId } from '../lib/whatsapp'
+export type LessonId = 'city' | 'parking' | 'highway' | 'refresher'
 
-type Lesson = {
+export type Lesson = {
   id: LessonId
-  number: string
   title: string
   description: string
-  whatsappUrl: string
 }
 
-const copy: Array<Omit<Lesson, 'whatsappUrl'>> = [
+export const lessons: Lesson[] = [
   {
     id: 'city',
-    number: '01',
     title: 'City Driving',
     description:
-      'Practise everyday driving situations, traffic awareness, intersections, and navigating busy roads.',
+      'Practise everyday roads, traffic awareness, intersections, and common urban driving situations.',
   },
   {
     id: 'parking',
-    number: '02',
     title: 'Parking Practice',
     description:
       'Work on parking manoeuvres, vehicle positioning, and handling tighter spaces.',
   },
   {
     id: 'highway',
-    number: '03',
     title: 'Highway Driving',
     description:
-      'Build familiarity with highway driving situations and appropriate driving techniques.',
+      'Discuss practical highway driving experience and the skills you want to develop.',
   },
   {
     id: 'refresher',
-    number: '04',
     title: 'Refresher Lessons',
     description:
-      'Get additional practice in the areas where you would like to improve.',
+      'Get additional practice in the areas where you would like to feel more comfortable.',
   },
 ]
 
-export const lessons: Lesson[] = copy.map((lesson) => ({
-  ...lesson,
-  whatsappUrl: getWhatsAppUrl(whatsappMessages[lesson.id]),
-}))
+export const bookingLessonOptions = [
+  ...lessons.map(({ id, title }) => ({ value: id, label: title })),
+  { value: 'not-sure', label: 'Not Sure Yet — Help Me Choose' },
+] as const
+
+export function isLessonId(value: string | null): value is LessonId {
+  return lessons.some((lesson) => lesson.id === value)
+}

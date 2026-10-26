@@ -1,72 +1,51 @@
 import { ArrowUpRight } from 'lucide-react'
 import { lessons } from '../data/lessons'
+import { Link } from './Link'
 
 export function Lessons() {
   return (
     <section id="lessons" className="lessons section" aria-labelledby="lessons-heading">
       <div className="shell">
-        <header className="section-head">
+        <header className="section-heading">
           <p className="eyebrow">
             <span className="eyebrow__mark" aria-hidden="true" />
-            02 — The experience
+            Driving lessons
           </p>
-          <div className="section-head__row">
-            <h2 id="lessons-heading" className="section-title">
-              Practice What Matters to You.
+          <div className="section-heading__row">
+            <h2 id="lessons-heading" className="section-heading__title">
+              Find the Right
+              <br />
+              Practice <span className="serif">for You</span>
             </h2>
-            <p className="section-head__lede">
-              Focused driving practice for the situations you want to feel more comfortable
-              handling.
+            <p className="section-heading__lede">
+              Choose what you would like to work on, and contact Lemozin to discuss
+              your lesson.
             </p>
           </div>
         </header>
 
-        <div className="lessons__grid">
-          <figure className="lessons__figure">
-            <div className="lessons__media">
-              <img
-                src="/images/lessons-1200.webp"
-                srcSet="/images/lessons-800.webp 800w, /images/lessons-1200.webp 1200w, /images/lessons-1600.webp 1600w"
-                sizes="(max-width: 900px) 100vw, 38vw"
-                width="1600"
-                height="2071"
-                alt="A driver's hand resting on the steering wheel in warm evening light."
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <figcaption className="lessons__caption">
-              <span className="lessons__caption-mark" aria-hidden="true" />
-              Practice, at your pace.
-            </figcaption>
-          </figure>
+        <ol className="lesson-list">
+          {lessons.map((lesson, index) => (
+            <li className="lesson-row" key={lesson.id}>
+              <span className="lesson-row__number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <div className="lesson-row__body">
+                <h3 className="lesson-row__title">{lesson.title}</h3>
+                <p className="lesson-row__description">{lesson.description}</p>
+              </div>
+              <Link className="lesson-row__action" href={`/book?lesson=${lesson.id}`}>
+                <span>Book this lesson</span>
+                <ArrowUpRight size={16} strokeWidth={1.9} aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
+        </ol>
 
-          <ol className="lesson-list">
-            {lessons.map((lesson) => (
-              <li key={lesson.id}>
-                <a
-                  className="lesson-row"
-                  href={lesson.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="lesson-row__num" aria-hidden="true">
-                    {lesson.number}
-                  </span>
-                  <span className="lesson-row__body">
-                    <span className="lesson-row__title">{lesson.title}</span>
-                    <span className="lesson-row__desc">{lesson.description}</span>
-                    <span className="lesson-row__action">
-                      Enquire about {lesson.title}
-                      <ArrowUpRight size={15} strokeWidth={2.1} aria-hidden="true" />
-                    </span>
-                  </span>
-                  <span className="sr-only"> (opens WhatsApp in a new tab)</span>
-                </a>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <p className="lesson-list__note">
+          Not sure where to begin? Choose{' '}
+          <span>Not Sure Yet — Help Me Choose</span> in the booking form.
+        </p>
       </div>
     </section>
   )

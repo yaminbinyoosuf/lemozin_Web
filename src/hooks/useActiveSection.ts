@@ -4,10 +4,14 @@ import { useEffect, useState } from 'react'
  * Highlights the navigation item for the section crossing the middle of the
  * viewport. Keeps Home active while the hero is on screen.
  */
-export function useActiveSection(ids: readonly string[]) {
+export function useActiveSection(ids: readonly string[], enabled = true) {
   const [active, setActive] = useState(ids[0] ?? '')
 
   useEffect(() => {
+    if (!enabled) {
+      return
+    }
+
     const elements = ids
       .map((id) => document.getElementById(id))
       .filter((element): element is HTMLElement => element !== null)
@@ -35,7 +39,7 @@ export function useActiveSection(ids: readonly string[]) {
     elements.forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
-  }, [ids])
+  }, [enabled, ids])
 
-  return active
+  return enabled ? active : (ids[0] ?? '')
 }

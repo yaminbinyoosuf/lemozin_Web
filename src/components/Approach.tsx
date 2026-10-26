@@ -29,8 +29,8 @@ export function Approach() {
         <figure className="approach__figure">
           <div className="approach__media">
             <img
-              src="/images/intro-1200.webp"
-              srcSet="/images/intro-800.webp 800w, /images/intro-1200.webp 1200w, /images/intro-1600.webp 1600w"
+              src="/images/approach-1200.webp"
+              srcSet="/images/approach-800.webp 800w, /images/approach-1200.webp 1200w, /images/approach-1600.webp 1600w"
               sizes="(max-width: 900px) 100vw, 46vw"
               width="1600"
               height="1200"

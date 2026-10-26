@@ -48,8 +48,8 @@ export function Hero() {
         <figure className="hero__figure">
           <div className="hero__media">
             <img
-              src="/images/hero-1200.webp"
-              srcSet="/images/hero-800.webp 800w, /images/hero-1200.webp 1200w, /images/hero-1600.webp 1600w"
+              src="/images/hero-driver-1200.webp"
+              srcSet="/images/hero-driver-800.webp 800w, /images/hero-driver-1200.webp 1200w, /images/hero-driver-1600.webp 1600w"
               sizes="(max-width: 980px) 100vw, 46vw"
               width="1600"
               height="2000"
